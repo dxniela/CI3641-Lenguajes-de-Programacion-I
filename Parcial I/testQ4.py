@@ -63,21 +63,33 @@ class TestPregunta4(TestCase):
                 
         x = Cuaterniones(1, 2, 3, 4)
     
-        self.assertEqual(str(x.__conjugate__()), str(Cuaterniones(1, -2, -3, -4)), "Se calcula el conjugado")
+        self.assertEqual(str(~x), str(Cuaterniones(1, -2, -3, -4)), "Se calcula el conjugado")
 
 
     def test_modulo(self):
                 
         x = Cuaterniones(1, 2, 3, 4)
 
-        self.assertEqual(x.__absolute__(), 5, "Se calcula el modulo")
+        self.assertEqual(+x, 5.477225575051661, "Se calcula el modulo")
 
 
     def test_str(self):
 
         x = Cuaterniones(1, 2, 3, 4)
+        y = Cuaterniones(3, -4, -2, 10)
+        z = Cuaterniones(1, -3, 5, -7)
+        u = Cuaterniones(3, 18, -30, -1)
+        v = Cuaterniones(1, -2, 3, 4)
+        t = Cuaterniones(1, 2, -3, 4)
+        w = Cuaterniones(1, 2, 3, -4)
 
         self.assertEqual(str(x), '(1 + 2i + 3j + 4k)', "Se imprime correctamente")
+        self.assertEqual(str(y), '(3 - 4i - 2j + 10k)', "Se imprime correctamente")
+        self.assertEqual(str(z), '(1 - 3i + 5j - 7k)', "Se imprime correctamente")
+        self.assertEqual(str(u), '(3 + 18i - 30j - 1k)', "Se imprime correctamente")
+        self.assertEqual(str(v), '(1 - 2i + 3j + 4k)', "Se imprime correctamente")
+        self.assertEqual(str(t), '(1 + 2i - 3j + 4k)', "Se imprime correctamente")
+        self.assertEqual(str(w), '(1 + 2i + 3j - 4k)', "Se imprime correctamente")
 
 
     def test_otros(self):
@@ -87,4 +99,7 @@ class TestPregunta4(TestCase):
         z = Cuaterniones(1, 3, 5, 7)
 
         self.assertEqual(str(x * y + z), str(Cuaterniones(-11, 9, 29, 19)), "Se multiplica y se suma segun la definicion")
-
+        self.assertEqual(str((y + y) * (z + (~x))), str(Cuaterniones(-4, 28, 8, 36)), "Se multiplica, se suma y se calcula la conjugada segun la definicion")
+        self.assertEqual(+(z * y), 50.19960159204453, "Se multiplica y se calcula el valor absoluto del resultado")
+        self.assertEqual(str(x * 3.0 + 7.0), str(Cuaterniones(10.0, 13.0, 16.0, 19.0)), "Se multiplica y se sumapor escalares")
+        self.assertEqual(str((y + y) * (+z)), str(Cuaterniones(73.32121111929344, 54.99090833947008, 36.66060555964672, 18.33030277982336)), "Se multiplica, se suma y se calcula valor absoluto segun la definicion")

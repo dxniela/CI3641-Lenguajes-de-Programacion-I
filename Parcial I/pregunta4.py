@@ -17,15 +17,18 @@ class Cuaterniones(object):
         self.c = c
         self.d = d
 
+    # Suma de cuaterniones
     def __add__(self, cuaternion):
         if type(cuaternion) == Cuaterniones:
             return Cuaterniones(self.a + cuaternion.a, self.b + cuaternion.b, self.c + cuaternion.c, self.d + cuaternion.d)
         elif type(cuaternion == int or cuaternion == float):
             return Cuaterniones(self.a + cuaternion, self.b + cuaternion, self.c + cuaternion, self.d + cuaternion)
 
-    def __conjugate__(self):
+    # Conjugada de un cuaternion
+    def __invert__(self):
         return Cuaterniones(self.a, -self.b, -self.c, -self.d)
 
+    # Producto de cuaterniones
     def __mul__(self, cuaternion):
         if type(cuaternion) == Cuaterniones:
             return Cuaterniones(self.a * cuaternion.a - self.b * cuaternion.b - self.c * cuaternion.c - self.d * cuaternion.d, 
@@ -35,9 +38,11 @@ class Cuaterniones(object):
         elif type(cuaternion == int or cuaternion == float):
             return Cuaterniones(self.a * cuaternion, self.b * cuaternion, self.c * cuaternion, self.d * cuaternion)
 
-    def __absolute__(self):
-        return math.floor((self.a ** 2 + self.b ** 2 + self.c ** 2 + self.d ** 2) ** 0.5)
+    # Valor absoluto de un cuaternion
+    def __pos__(self):
+        return (self.a ** 2 + self.b ** 2 + self.c ** 2 + self.d ** 2) ** 0.5
 
+    # Imprime el cuaternion
     def __str__(self) -> str:
         if self.b < 0 and self.c < 0 and self.d < 0:
             return f'({self.a} - {abs(self.b)}i - {abs(self.c)}j - {abs(self.d)}k)'.format(self=self)
