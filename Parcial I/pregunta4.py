@@ -26,7 +26,7 @@ class Cuaterniones(object):
     def __conjugate__(self):
         return Cuaterniones(self.a, -self.b, -self.c, -self.d)
 
-    def __multiply__(self, cuaternion):
+    def __mul__(self, cuaternion):
         if type(cuaternion) == Cuaterniones:
             return Cuaterniones(self.a * cuaternion.a - self.b * cuaternion.b - self.c * cuaternion.c - self.d * cuaternion.d, 
                                 self.a * cuaternion.b + self.b * cuaternion.a + self.c * cuaternion.d - self.d * cuaternion.c,
@@ -39,8 +39,19 @@ class Cuaterniones(object):
         return math.floor((self.a ** 2 + self.b ** 2 + self.c ** 2 + self.d ** 2) ** 0.5)
 
     def __str__(self) -> str:
-        if self.b < 0 or self.c < 0 or self.d < 0:
-            return f'({self.a} - {self.b}i - {self.c}j - {self.d}k)'.format(self=self)
+        if self.b < 0 and self.c < 0 and self.d < 0:
+            return f'({self.a} - {abs(self.b)}i - {abs(self.c)}j - {abs(self.d)}k)'.format(self=self)
+        elif self.b < 0 and self.c < 0:
+            return f'({self.a} - {abs(self.b)}i - {abs(self.c)}j + {self.d}k)'.format(self=self)
+        elif self.b < 0 and self.d < 0:
+            return f'({self.a} - {abs(self.b)}i + {self.c}j - {abs(self.d)}k)'.format(self=self)
+        elif self.c < 0 and self.d < 0:
+            return f'({self.a} + {self.b}i - {abs(self.c)}j - {abs(self.d)}k)'.format(self=self)
+        elif self.b < 0:
+            return f'({self.a} - {abs(self.b)}i + {self.c}j + {self.d}k)'.format(self=self)
+        elif self.c < 0:
+            return f'({self.a} + {self.b}i - {abs(self.c)}j + {self.d}k)'.format(self=self)
+        elif self.d < 0:
+            return f'({self.a} + {self.b}i + {self.c}j - {abs(self.d)}k)'.format(self=self)
         else:
             return f'({self.a} + {self.b}i + {self.c}j + {self.d}k)'.format(self=self) 
-

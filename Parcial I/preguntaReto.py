@@ -1,16 +1,5 @@
-# Daniela Ramirez 16-10940
-import time
-from sympy import *
-import math
-inicio = time.time()
-def Fib(N):
-    if(N==0 or N==1):
-        return N
-    else:
-        return (Fib(N-2)+Fib(N-1))
-def evil(N):
-    return Fib(math.floor(math.log2(bell(N+1)))+1)
-n = int(input("N: "))
-print(evil(n))
-final = time.time()
-print("Tiempo: ", final-inicio)
+import sympy
+from math import *
+f=lambda a,b,n:a if n<1 else b if n<2 else f(b,a+b,n-1)
+n=int(input())
+print(f(0,1,floor(log2(sympy.bell(n+1)))+1))
