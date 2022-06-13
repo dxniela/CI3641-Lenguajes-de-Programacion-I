@@ -95,9 +95,6 @@ function asignar(s) {
     console.log("Memoria desde " + temp.lb + " a " + temp.ub + " asignada");
 }
  
-function liberar(s) {
-    
-}
 
 // Programa principal
 
@@ -120,10 +117,10 @@ const prompt = (query) => new Promise((resolve) => rl.question(query, resolve));
     
     while(true){
         
-        const command = (await prompt("Ingrese un comando: ")).toUpperCase();
+        const command = (await prompt("\nIngrese un comando: ")).toUpperCase();
 
         if (command == "RESERVAR") {
-            const size = await prompt("Ingrese el tamaño del bloque a reservar: ");
+            const size = await prompt("\nIngrese el tamaño del bloque a reservar: ");
             const sizeInt = parseInt(size);
             if (isNaN(sizeInt)) {
                 console.log("El tamaño del bloque debe ser un numero");
@@ -135,26 +132,8 @@ const prompt = (query) => new Promise((resolve) => rl.question(query, resolve));
             process.exit(0);
         }  
         else {
-            console.log("Comando invalido");
+            console.log("\nComando invalido");
         }
     }
     
 })();
-
-/*
-if (process.argv[2] == "RESERVAR"){
-    asignar(parseInt(process.argv[4]));
-}
-else if (process.argv[2] == "LIBERAR"){
-    liberar(parseInt(process.argv[3]));
-}
-else if (process.argv[2] == "MOSTRAR"){
-    mostrar();
-}
-else if (process.argv[2] == "SALIR"){
-    console.log("Bye!");
-    process.exit();
-}
-else {
-    console.log("Comando no reconocido");
-}*/
