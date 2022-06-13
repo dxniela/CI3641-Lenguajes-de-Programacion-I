@@ -117,18 +117,19 @@ const prompt = (query) => new Promise((resolve) => rl.question(query, resolve));
     
     while(true){
         
-        const command = (await prompt("\nIngrese un comando: ")).toUpperCase();
+        const command = ((await prompt("\nIngrese un comando: "))).toUpperCase().toString();
 
-        if (command == "RESERVAR") {
-            const size = await prompt("\nIngrese el tamaño del bloque a reservar: ");
-            const sizeInt = parseInt(size);
-            if (isNaN(sizeInt)) {
+        let commandArray = command.split(" ");
+
+        if (commandArray[0] == "RESERVAR") {
+            const size = parseInt(commandArray[2]);
+            if (isNaN(size)) {
                 console.log("El tamaño del bloque debe ser un numero");
                 continue;
             }
-            asignar(sizeInt);
+            asignar(size);
         }
-        else if (command == "SALIR") {
+        else if (commandArray[0] == "SALIR") {
             process.exit(0);
         }  
         else {
